@@ -2,7 +2,7 @@ Chạy lệnh sau để cài thư viện: npm i
 
 Tạo 1 file .env với nội dung:
 PORT = 5000
-MONGO_URI = mongodb+srv://duong:duong12345@cluster0.di8d9l2.mongodb.net/?retryWrites=true&w=majority
+MONGO_URI = mongodb+srv://quang:MD0lJ0jcz4wjFUyl@cluster0.qg5tsom.mongodb.net/
 
 Chạy lệnh sau để bắt đầu: npm start
 Web sẽ chạy trên cổng http://localhost:5000/
