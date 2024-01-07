@@ -5,7 +5,7 @@ const Users = require('../models/user');
 const bcrypt = require('bcrypt');
 
 router.get('/login', async (req, res) => {
-     const data = await eventsModel.find();
+     const data = await Events.find();
      res.render("index", {
          title: "Trang chủ",
          data: data
