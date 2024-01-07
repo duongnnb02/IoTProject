@@ -1,0 +1,85 @@
+<%- include('layout/header') %>
+    <div class="container">
+        <div>
+            <h1>Tìm kiếm thông tin</h1>
+            <form id="form_search">
+                <input type="text" name="keyword" placeholder="Nhập từ khóa tìm kiếm" id="search_box">
+                <input type="button" value="Tìm kiếm" id="btn_search">
+            </form>
+            <h6>Từ khóa: Tên thiết bị</h6>
+        </div>
+        <div class="row my-4">
+            <div class="col-log-12">
+                <table class="table-responsive">
+                    <% if (data !='' ) { %>
+                        <table class="table table-striped text-center my-3">
+                            <thead>
+                                <tr class="table-dark">
+                                    <th>STT</th>
+                                    <th>Tên thiết bị</th>
+                                    <th>Hiệu điện thế</th>
+                                    <th>Công suất</th>
+                                    <th>Năng lượng</th>
+                                    <th>Tình trạng</th>
+                                    <th>Thời gian</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% data.forEach((row, index)=> { %>
+                                    <tr class="align-middle">
+                                        <td>
+                                            <%= index %>
+                                        </td>
+                                        <td class="name_table">
+                                            <%= row.device_id %>
+                                        </td>
+                                        <td>
+                                            <%= row.U %>
+                                        </td>
+                                        <td>
+                                            <%= row.P %>
+                                        </td>
+                                        <td>
+                                            <%= row.W %>
+                                        </td>
+                                        <td>
+                                            <% if (row.status==='Hong' ) { %>
+                                                Hỏng
+                                                <% } else { %>
+                                                    Hoạt động bình thường
+                                                    <% } %>
+                                        </td>
+                                        <td>
+                                            <%= row.created %>
+                                        </td>
+                                    </tr>
+                                    <% }); %>
+                            </tbody>
+                        </table>
+                        <% } else { %>
+                            <h1 class="text-center text-secondary mt-5">Không có dữ liệu devices</h1>
+                            <% } %>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+        const btn_search = document.querySelector('#btn_search');
+        const tableName = document.querySelectorAll('.name_table');
+        const search = document.querySelector("#search_box")
+        const tbody = document.querySelector('tbody');
+        const name_user = [];
+        tableName.forEach(element => {
+            name_user.push(element.textContent.trim());
+        });
+
+        btn_search.onclick = function () {
+            const index = name_user.findIndex((item) => search.value === item);
+            const item = tableName[index].parentElement;
+
+            tbody.innerHTML = "";
+            tbody.appendChild(item);
+        }
+    </script>
+
+    <%- include('layout/footer') %>
