@@ -10,7 +10,7 @@ router.get("/home", async (req, res) => {
   res.render("home", {
     title: "Trang chủ",
     data: data,
-    userName: user.name,
+    userName: user.name
   });
 });
 
@@ -66,7 +66,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.post("/logout", async (req, res) => {
+router.get("/logout", async (req, res) => {
   req.session.destroy((err) => {
     console.log(err);
     res.redirect("/");

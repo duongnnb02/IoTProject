@@ -6,7 +6,7 @@
                 <input type="text" name="keyword" placeholder="Nhập từ khóa tìm kiếm" id="search_box">
                 <input type="button" value="Tìm kiếm" id="btn_search">
             </form>
-            <h6>Từ khóa: Tên thiết bị</h6>
+            <h6>Từ khóa: Tình trạng</h6>
         </div>
         <div class="row my-4">
             <div class="col-log-12">
@@ -30,7 +30,7 @@
                                         <td>
                                             <%= index %>
                                         </td>
-                                        <td class="name_table">
+                                        <td>
                                             <%= row.device_id %>
                                         </td>
                                         <td>
@@ -42,7 +42,7 @@
                                         <td>
                                             <%= row.W %>
                                         </td>
-                                        <td>
+                                        <td class="status">
                                             <% if (row.status==='Hong' ) { %>
                                                 Hỏng
                                                 <% } else { %>
@@ -57,7 +57,7 @@
                             </tbody>
                         </table>
                         <% } else { %>
-                            <h1 class="text-center text-secondary mt-5">Không có dữ liệu devices</h1>
+                            <h1 class="text-center text-secondary mt-5">Không có dữ liệu</h1>
                             <% } %>
                 </table>
             </div>
@@ -65,7 +65,7 @@
     </div>
     <script>
         const btn_search = document.querySelector('#btn_search');
-        const tableName = document.querySelectorAll('.name_table');
+        const tableName = document.querySelectorAll('.status');
         const search = document.querySelector("#search_box")
         const tbody = document.querySelector('tbody');
         const name_user = [];
@@ -75,6 +75,7 @@
 
         btn_search.onclick = function () {
             const index = name_user.findIndex((item) => search.value === item);
+            console.log(index);
             const item = tableName[index].parentElement;
 
             tbody.innerHTML = "";

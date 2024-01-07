@@ -28,30 +28,18 @@
                 <ul class="navbar-nav ms-auto" style="align-items: center;">
                     <!-- <li class="nav-item active">
                         <a class="nav-link" href="/"><i class="fas fa-home me-1"></i>Trang chủ</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/add"><i class="fas fa-user-plus me-1"></i>Thêm thiết bị</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#"><i class="fas fa-globe me-1"></i>Về tôi</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#"><i class=" fas fa-envelope me-1"></i>Liên hệ</a>
                     </li> -->
                     <% if (!!userName)
                         {
                             %>
-                                <li class="nav-item">
-                                    <p class="nav-link" href="#">Hello <%= userName %></p>
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="#" style="margin-right: 20px;"><i class="far fa-hand-peace" style="margin-right: 10px;"></i>Xin chào <%= userName %></a>
                                 </li>
                             <%
                         }
                     %>
-
-                    <li class="nav-item">
-                       <form action="/logout" method="post">
-                            <button type="submit" style="border: unset; color: #eee; background: unset;">Logout</button>
-                       </form>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/logout">Đăng xuất</a>
                     </li>
                 </ul>
             </div>

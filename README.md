@@ -1,10 +1,4 @@
-Chạy các lệnh sau để cài thư viện:
-npm init
-npm i -D express mongoose moment shortid express-session ejs multer dotenv nodemon bcrypt
-npm i mqtt --save
-
-Thêm dòng sau vào script trong package.json:
-"start": "nodemon index.js"
+Chạy lệnh sau để cài thư viện: npm i
 
 Tạo 1 file .env với nội dung:
 PORT = 5000
