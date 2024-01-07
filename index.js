@@ -3,9 +3,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const mqtt = require("mqtt");
-const Events = require('./models/eventsModel');
 const shortId = require('shortid');
+const path = require('path');
+const bcrypt = require('bcrypt');
 
+const Events = require('./models/eventsModel');
+const Users = require('./models/user')
 const client = mqtt.connect("mqtt://broker.hivemq.com:1883");
 const topic = "esp8266/dht11";
 const app = express();
@@ -62,8 +65,8 @@ app.use((req, res, next) => {
 })
 
 app.set('view engine', 'ejs');
-
+app.use(express.static("public"));
 app.use("", require('./routes/routes'))
 
-app.listen(PORT, () => {console.log(`${PORT}`);
+app.listen(PORT, () => {console.log(`htpp://localhost:${PORT}`);
 })
