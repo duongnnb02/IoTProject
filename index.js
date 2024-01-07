@@ -7,6 +7,7 @@ const mqtt = require("mqtt");
 const shortId = require("shortid");
 const path = require("path");
 const bcrypt = require("bcrypt");
+const moment = require('moment');
 
 const Events = require("./models/eventsModel");
 const Users = require("./models/user");
@@ -48,7 +49,7 @@ client.on("message", async (topic, message) => {
   );
   let data = message.toString();
   data = JSON.parse(data);
-  //data.created = moment().utc().add(5, 'hours');
+  data.created = moment().add(7, 'hours');
   data._id = shortId.generate();
   // Save live data into database
   await saveData(data);
