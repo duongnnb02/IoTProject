@@ -4,9 +4,9 @@ const Events = require('../models/eventsModel');
 const Users = require('../models/user');
 const bcrypt = require('bcrypt');
 
-router.get('/login', async (req, res) => {
-     const data = await eventsModel.find();
-     res.render("index", {
+router.get('/home', async (req, res) => {
+     const data = await Events.find();
+     res.render("home", {
          title: "Trang chủ",
          data: data
     })
@@ -16,11 +16,11 @@ router.get('/', (req, res) => {
     res.render("login");
 })
 
-router.get("/signup", (req, res) => {
-    res.render("signup");
+router.get("/register", (req, res) => {
+    res.render("register");
 })
 
-router.post("/signup", async (req, res) => {
+router.post("/register", async (req, res) => {
     const user = {
         name: req.body.username,
         password: req.body.password
@@ -34,7 +34,7 @@ router.post("/signup", async (req, res) => {
         const hashedPassword = await bcrypt.hash(user.password, saltRounds);
         user.password = hashedPassword;
         const userData = await Users.insertMany(user);
-        res.render("login");
+        res.redirect('/login');
         console.log(userData);
     }
 })
@@ -47,7 +47,7 @@ router.post("/login", async (req, res) => {
         }
         const isPasswordMatch = await bcrypt.compare(req.body.password, check.password);
         if (isPasswordMatch){
-            res.render("index");
+               res.redirect('/home');
         } else {
             console.error("Sai mật khẩu");
         }
