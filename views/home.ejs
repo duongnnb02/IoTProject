@@ -25,35 +25,41 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <% data.forEach((row, index)=> { %>
-                                    <tr class="align-middle">
-                                        <td>
-                                            <%= index %>
-                                        </td>
-                                        <td>
-                                            <%= row.device_id %>
-                                        </td>
-                                        <td>
-                                            <%= row.U %>
-                                        </td>
-                                        <td>
-                                            <%= row.P %>
-                                        </td>
-                                        <td>
-                                            <%= row.W %>
-                                        </td>
-                                        <td class="status">
-                                            <% if (row.status==='Hong' ) { %>
-                                                Hỏng
-                                                <% } else { %>
-                                                    Hoạt động bình thường
-                                                    <% } %>
-                                        </td>
-                                        <td>
-                                            <%= row.created %>
-                                        </td>
-                                    </tr>
-                                    <% }); %>
+                                <% data.sort((a, b)=> new Date(b.created) - new Date(a.created)); %>
+                                    <% data.forEach((row, index)=> { %>
+                                        <tr class="align-middle">
+                                            <td>
+                                                <%= index %>
+                                            </td>
+                                            <td>
+                                                <%= row.device_id %>
+                                            </td>
+                                            <td>
+                                                <%= row.U %>
+                                            </td>
+                                            <td>
+                                                <%= row.P %>
+                                            </td>
+                                            <td>
+                                                <%= row.W %>
+                                            </td>
+                                            <td class="status">
+                                                <% if (row.status==='Hong' ) { %>
+                                                    Hỏng
+                                                    <% } else { %>
+                                                        Hoạt động bình thường
+                                                        <% } %>
+                                            </td>
+                                            <td>
+                                                <% var createdDate=new Date(row.created); var
+                                                    formattedDate=createdDate.toLocaleString('en-GB', { day: '2-digit' ,
+                                                    month: '2-digit' , year: 'numeric' , hour: '2-digit' ,
+                                                    minute: '2-digit' , second: '2-digit' , timeZoneName: 'short' });%>
+                                                    <%= formattedDate %>
+
+                                            </td>
+                                        </tr>
+                                        <% }); %>
                             </tbody>
                         </table>
                         <% } else { %>
@@ -63,24 +69,44 @@
             </div>
         </div>
     </div>
+
     <script>
         const btn_search = document.querySelector('#btn_search');
         const tableName = document.querySelectorAll('.status');
-        const search = document.querySelector("#search_box")
+        const search = document.querySelector("#search_box");
         const tbody = document.querySelector('tbody');
         const name_user = [];
+
         tableName.forEach(element => {
-            name_user.push(element.textContent.trim());
+            name_user.push(element.textContent.trim().toLowerCase()); // Convert to lowercase for case-insensitive search
         });
 
         btn_search.onclick = function () {
-            const index = name_user.findIndex((item) => search.value === item);
-            console.log(index);
-            const item = tableName[index].parentElement;
+            const keyword = search.value.trim().toLowerCase(); // Convert to lowercase for case-insensitive search
+            const matchingIndices = [];
 
-            tbody.innerHTML = "";
-            tbody.appendChild(item);
+            name_user.forEach((item, index) => {
+                // Change the condition to match partially
+                if (item.includes(keyword)) {
+                    matchingIndices.push(index);
+                }
+            });
+
+            // Display matching rows in the tbody
+            if (matchingIndices.length > 0) {
+                tbody.innerHTML = "";
+                matchingIndices.forEach(index => {
+                    const item = tableName[index].parentElement;
+                    tbody.appendChild(item.cloneNode(true));
+                });
+            } else {
+                // If no matches, clear the tbody
+                tbody.innerHTML = "";
+                // Optionally, you can display a message
+                tbody.innerHTML = "<tr><td colspan='7' class='text-center'>Không có kết quả phù hợp</td></tr>";
+            }
         }
     </script>
+
 
     <%- include('layout/footer') %>

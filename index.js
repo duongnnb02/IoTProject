@@ -49,7 +49,7 @@ client.on("message", async (topic, message) => {
   );
   let data = message.toString();
   data = JSON.parse(data);
-  data.created = moment().add(7, 'hours');
+  data.created = moment();
   data._id = shortId.generate();
   // Save live data into database
   await saveData(data);
