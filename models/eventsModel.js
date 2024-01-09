@@ -14,28 +14,26 @@ const EventsSchema = new Schema({
         required: true
     },
     U: {
-        type: Number,
-        default: null
+        type: Number
     },
     I: {
-        type: Number,
-        default: null
+        type: Number
     },
     P: {
         type: Number,
         required: true
     },
     W: {
-        type: Number,
-        required: true
+        type: Number
     },
     F: {
-        type: Number,
-        required: true
+        type: Number
     },
     PF: {
-        type: Number,
-        required: true
+        type: Number
+    },
+    status: {
+        type: Number
     },
     created: {
         type: Date,
